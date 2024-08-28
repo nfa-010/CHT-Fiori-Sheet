@@ -150,15 +150,12 @@ sap.ui.define([
 		formatButtonVisibility: function(sProdparallel, sItemParrallel, sQcDone) {
 			debugger;
 
-			// Default visibility
 			var oView = this.getView();
 			var oItemModel = oView.getModel("Item");
 			var aItems = oItemModel.getProperty("/results");
 
-			// Default visibility
 			var bShowButton = false;
 
-			// Case when Prodparallel is YES
 			if (sProdparallel === "YES") {
 				// Check if QcDone is 'X'
 				if (sQcDone === "X") {
