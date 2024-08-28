@@ -1,9 +1,263 @@
-<mvc:View controllerName="CHT-Fiori-Sheet.controller.View1" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
-	displayBlock="true" xmlns="sap.m">
+<mvc:View controllerName="CHT-Sheet.controller.View1" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" displayBlock="true" height="100%">
 	<App>
 		<pages>
-			<Page title="{i18n>title}">
-				<content></content>
+			<Page id="page" title="CHT Digital Cooking Sheet" class="pageTitle sapUiContentPadding sapUiResponsivePadding--header">
+				<content>
+					<VBox>
+						<!--The first block after the title-->
+						<VBox>
+							<Panel class="getBorder">
+								<!--First Line of First Block-->
+								<FlexBox alignItems="Start" justifyContent="Start" renderType="Div" wrap="Wrap">
+									<VBox class="text-container">
+										<Label text="Production Order No." class="label-text"/>
+										<Text text="{Head>/Prodorderno}" class="text-form"/>
+										<layoutData>
+											<FlexItemData growFactor="0.5"/>
+										</layoutData>
+									</VBox>
+									<VBox class="text-container">
+										<Label text="Item Name" class="label-text"/>
+										<Text text="{Head>/Itemname}" class="text-form"/>
+										<layoutData>
+											<FlexItemData growFactor="4"/>
+										</layoutData>
+									</VBox>
+									<VBox class="text-container">
+										<Label text="Production Order Parallel" class="label-text"/>
+										<Text text="{Head>/Prodparallel}" class="text-form"/>
+										<layoutData>
+											<FlexItemData growFactor="1"/>
+										</layoutData>
+									</VBox>
+									<VBox class="text-container">
+										<Label text="Planned Qty" class="label-text"/>
+										<Text text="{Head>/Plannedqty}" class="text-form"/>
+										<layoutData>
+											<FlexItemData growFactor="0.4"/>
+										</layoutData>
+									</VBox>
+									<VBox class="text-container">
+										<Label text="Vessel #" class="label-text"/>
+										<Text text="{Head>/Vesselno}" class="text-form"/>
+										<layoutData>
+											<FlexItemData growFactor="0.4"/>
+										</layoutData>
+									</VBox>
+									<VBox class="text-container">
+										<Label text="Start Time" class="label-text"/>
+										<Text text="{path: 'Head>/Starttime', formatter: '.formatDateTime'}" class="text-form"/>
+										<layoutData>
+											<FlexItemData growFactor="1"/>
+										</layoutData>
+									</VBox>
+								</FlexBox>
+								<!--Second Line of First Block-->
+								<FlexBox alignItems="Start" justifyContent="Start" renderType="Div">
+									<VBox class="text-container">
+										<Label text="Production Engineer" class="label-text"/>
+										<Text text="{Head>/Prodeng}" class="text-form"/>
+										<layoutData>
+											<FlexItemData growFactor="1"/>
+										</layoutData>
+									</VBox>
+									<VBox class="text-container">
+										<Label text="Production Supervisor" class="label-text"/>
+										<Text text="{Head>/Qcsprvsr}" class="text-form"/>
+										<layoutData>
+											<FlexItemData growFactor="1"/>
+										</layoutData>
+									</VBox>
+									<VBox class="text-container">
+										<Label text="QC Supervisor" class="label-text"/>
+										<Text text="{Head>/Supervisor}" class="text-form"/>
+										<layoutData>
+											<FlexItemData growFactor="1"/>
+										</layoutData>
+									</VBox>
+								</FlexBox>
+							</Panel>
+						</VBox>
+						<!--Second block -->
+						<List id="dynamicList" items="{Item>/results}">
+							<items>
+								<CustomListItem>
+									<Panel class="getBorder" id="dynamicContainer">
+										<VBox class="main">
+											<FlexBox justifyContent="Center" alignContent="Start" renderType="List" wrap="Wrap" class="serial-container">
+												<!--Serial With the Block-->
+												<FlexBox justifyContent="Center" alignContent="Center" class="serial-no" direction="Column">
+													<Text text="{Item>SerialNumber}" class="serial-text"/>
+												</FlexBox>
+												<!--HBox to Enclose Checkbox, Panel, Submit Button-->
+												<HBox id="mainHbox" alignItems="Start" justifyContent="Start" class="repeat-block-content">
+													<customData>
+														<core:CustomData key="qc-status" value="{Item>Qcdone}" writeToDom="true"/>
+													</customData>
+													<!--Checkbox-->
+													<VBox class="checkbox-box">
+														<CheckBox selected="false"/>
+													</VBox>
+													<Panel>
+														<FlexBox alignItems="Start" justifyContent="Start" renderType="Div" wrap="Wrap">
+															<VBox class="text-container">
+																<Label text="Raw Material Name" class="label-text"/>
+																<Text text="{Item>RawMat}" class="text-form"/>
+																<layoutData>
+																	<FlexItemData growFactor="0.2"/>
+																</layoutData>
+															</VBox>
+															<VBox class="text-container">
+																<Label text="Critical" class="label-text"/>
+																<Text text="{Item>Critical}" class="text-form"/>
+																<layoutData>
+																	<FlexItemData growFactor="0"/>
+																</layoutData>
+															</VBox>
+															<VBox class="text-container">
+																<Label text="Comments" class="label-text"/>
+																<Text text="{Item>Comments}" class="text-form"/>
+																<layoutData>
+																	<FlexItemData growFactor="2"/>
+																</layoutData>
+															</VBox>
+														</FlexBox>
+														<FlexBox alignItems="Start" justifyContent="Start" renderType="Div" wrap="Wrap">
+															<VBox class="text-container-0">
+																<Label text="Planned Quantity" class="label-text"/>
+																<Text text="{Item>PlnQty}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-0">
+																<Label text="Issued Quantity" class="label-text"/>
+																<Text text="{Item>IssQty}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-0">
+																<Label text="Actual Quantity" class="label-text"/>
+																<Input id="actualQuantity" placeholder="Actual Quantity" class="text-input" value="{Item>ActQty}" enabled="{= ${Item>Qcdone} !== 'X' }"></Input>
+															</VBox>
+															<VBox class="text-container-0">
+																<Label text="Std. Min Temp" class="label-text"/>
+																<Text text="{Item>StdMinTemp}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-0">
+																<Label text="Std. Max Temp" class="label-text"/>
+																<Text text="{Item>StdMaxTemp}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-0">
+																<Label text="Actual Temp" class="label-text"/>
+																<Input id="actualTemp" placeholder="Actual Temperature" class="text-input" value="{Item>ActualTemp}" enabled="{= ${Item>Qcdone} !== 'X' }"></Input>
+															</VBox>
+															<VBox class="text-container-0">
+																<Label text="Std. Min RPM" class="label-text"/>
+																<Text text="{Item>StdMinRpm}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-0">
+																<Label text="Std. Max RPM" class="label-text"/>
+																<Text text="{Item>StdMaxRpm}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-0">
+																<Label text="Actual RPM" class="label-text"/>
+																<Input id="actualRPM" placeholder="Actual RPM" class="text-input" value="{Item>ActRpm}" enabled="{= ${Item>Qcdone} !== 'X' }"></Input>
+															</VBox>
+														</FlexBox>
+														<FlexBox alignItems="Start" justifyContent="Start" renderType="Div" wrap="Wrap">
+															<VBox class="text-container-ext ">
+																<Label text="Std. Min PH" class="label-text"/>
+																<Text text="{Item>StdMinPh}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-ext">
+																<Label text="Std. Max PH" class="label-text"/>
+																<Text text="{Item>StdMaxPh}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-ext">
+																<Label text="Actual PH" class="label-text"/>
+																<Input id="actualPH" placeholder="Actual PH" class="text-input" value="{Item>ActualPh}" enabled="{= ${Item>Qcdone} !== 'X' }"></Input>
+															</VBox>
+															<VBox class="text-container-ext">
+																<Label text="Std. Min Pressure" class="label-text"/>
+																<Text text="{Item>StdMinPres}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-ext">
+																<Label text="Std. Max Pressure" class="label-text"/>
+																<Text text="{Item>StdMaxPres}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-ext">
+																<Label text="Actual Pressure" class="label-text"/>
+																<Input id="actualPressure" placeholder="Actual Pressure" class="text-input" value="{Item>ActPres}" enabled="{= ${Item>Qcdone} !== 'X' }"></Input>
+															</VBox>
+															<VBox class="text-container-ext">
+																<Label text="Packing Size" class="label-text"/>
+																<Text text="{Item>PackSize}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-ext">
+																<Label text="Loose Quantity" class="label-text"/>
+																<Text text="{Item>LooseQty}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-ext">
+																<Label text="Process Start Time" class="label-text"/>
+																<Text text="{Item>ProcessTime}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container-ext">
+																<Label text="Process End Time" class="label-text"/>
+																<Text text="{Item>ProcessEnd}" class="text-form"/>
+															</VBox>
+														</FlexBox>
+														<FlexBox alignItems="Start" justifyContent="Start" renderType="Div" wrap="Wrap">
+															<VBox class="text-container">
+																<Label text="Username" class="label-text"/>
+																<Text text="{Item>Username}" class="text-form"/>
+															</VBox>
+															<VBox class="text-container">
+																<Label text="QC Start Time" labelFor="qcStartTimeInput" class="label-text"/>
+																<Input id="qcStartTimeInput" placeholder="Enter QC Start Time" class="text-input" value="{Item>QcStart}"
+																	enabled="{= ${Item>Qcdone} !== 'X' }"></Input>
+															</VBox>
+															<VBox class="text-container">
+																<Label text="QC End Time" labelFor="qcEndTimeInput" class="label-text"/>
+																<Input id="qcEndTimeInput" placeholder="Enter QC End Time" class="text-input" value="{Item>QcEnd}" enabled="{= ${Item>Qcdone} !== 'X' }"></Input>
+															</VBox>
+															<VBox class="text-container">
+																<Label text="Qc Comments" labelFor="qcComments" class="label-text"/>
+																<Input id="qcComments" placeholder="Enter QC Comments" value="{Item>QcComment}" class="text-input" enabled="{= ${Item>Qcdone} !== 'X' }"></Input>
+																<layoutData>
+																	<FlexItemData growFactor="1"/>
+																</layoutData>
+															</VBox>
+														</FlexBox>
+														<layoutData>
+															<FlexItemData growFactor="2"/>
+														</layoutData>
+													</Panel>
+													<!--Submit Button-->
+													<VBox class="submit-container">
+														<Button id="submitButton" text="Submit" type="Emphasized" class="submitBtn" press="submitBtn"
+															visible="{ parts: [ 'Head>/Prodparallel', 'Item>Item', 'Item>Qcdone' ], formatter: '.formatButtonVisibility' }"/>
+													</VBox>
+												</HBox>
+											</FlexBox>
+											<FlexBox  justifyContent="Center" alignContent="Center" renderType="List" class="msg-serial-container"
+												visible="{= ${Item>Ins} !== '' }">
+												<!--Serial Number-->
+												<FlexBox justifyContent="Center" alignContent="Center" class="serial-msg-no" direction="Column">
+													<Text text="{Item>MessageSerialNumber}" class="serial-msg-text"/>
+												</FlexBox>
+												<!--Message Text-->
+												<Hbox alignItems="Start" justifyContent="Center" class="green-msg-container">
+													<FlexBox alignItems="Center" justifyContent="Center" renderType="Div" wrap="Wrap" id="Instruct">
+														<VBox class="text-container">
+															<Text text="{Item>Ins}" class="msg-text"/>
+														</VBox>
+													</FlexBox>
+												</Hbox>
+											</FlexBox>
+										</VBox>
+									</Panel>
+								</CustomListItem>
+							</items>
+						</List>
+					</VBox>
+				</content>
 			</Page>
 		</pages>
 	</App>
