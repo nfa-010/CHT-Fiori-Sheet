@@ -19,8 +19,6 @@ sap.ui.define([
 	"use strict";
 	var sUrl = "/sap/opu/odata/SAP/ZCHTCOOKING_SRV/";
 	var mark;
-	var checkItem;
-	var itemExecutionMap = {};
 	var prod;
 	var user;
 	return Controller.extend("CHT-Sheet.controller.View1", {
@@ -33,7 +31,6 @@ sap.ui.define([
 			this.oJSONModel3 = new JSONModel();
 			this.oModel3 = new sap.ui.model.odata.ODataModel(sUrl, true);
 			user = sap.ushell.Container.getUser().getId();
-			// user = "AHSAN_EXD";
 			debugger;
 			this.getProductionOrderData();
 
@@ -113,7 +110,6 @@ sap.ui.define([
 		},
 
 		_submitLineByLine: function(oData, oEvent) {
-			// Your line-by-line submission logic here
 		},
 
 		_submitSingleLine: function(oData, oEvent) {
@@ -127,7 +123,7 @@ sap.ui.define([
 				success: function(data2) {
 					debugger;
 					oData.Qcdone = "X";
-					var oMainModel = that.getView().getModel("Item"); // Assuming the main model is set to the view
+					var oMainModel = that.getView().getModel("Item"); 
 
 					var oMainModelData = oMainModel.getProperty("/results");
 					var oUpdatedEntry = oMainModelData.find(function(item) {
@@ -151,12 +147,6 @@ sap.ui.define([
 			});
 
 		},
-		// formatHboxClass: function(sQcDone) {
-
-		// 	debugger;
-
-		// },
-		// formatHboxClass: function(sProdparallel, sItemParrallel, sQcDone) {
 		formatButtonVisibility: function(sProdparallel, sItemParrallel, sQcDone) {
 			debugger;
 
@@ -172,17 +162,14 @@ sap.ui.define([
 			if (sProdparallel === "YES") {
 				// Check if QcDone is 'X'
 				if (sQcDone === "X") {
-					return false; // Hide button if QcDone is 'X'
+					return false;
 				} else {
-					return true; // Show button if QcDone is not 'X'
+					return true; 
 				}
 			}
 
-			// Case when Prodparallel is NO
 			if (sProdparallel === "NO") {
-				// Check if the current item should show the button
 				if (sQcDone !== "X") {
-					// Show button only for the first item with Qcdone !== 'X'
 					for (var i = 0; i < aItems.length; i++) {
 						if (aItems[i].Qcdone !== "X") {
 							if (mark !== "X") {
@@ -190,7 +177,6 @@ sap.ui.define([
 								mark = "X";
 							}
 						}
-						// break; // Only need to check the first matching item
 					}
 
 				} else {
@@ -202,7 +188,6 @@ sap.ui.define([
 		},
 		formatDateTime: function(dateTime) {
 			if (dateTime) {
-				// Format date and time, excluding the time zone
 				var oDateFormat = DateFormat.getDateTimeInstance({
 					pattern: "dd/MM/YYYY H:mm"
 				});
