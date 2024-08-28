@@ -1,1 +1,205 @@
-/* Enter your custom styles here */
+html {
+    overflow: hidden;
+}
+
+
+/*Title*/
+
+.pageTitle .sapMTitle {
+    font-size: 24px;
+    color: #026bb2;
+    font-family: Arial;
+    font-weight: bold;
+    background-color: #F8F8F8;
+    width: 100%;
+}
+
+.sapMPage.sapUiContentPadding>section {
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.sapMPanelContent {
+    padding: 0.7rem;
+}
+
+.getBorder {
+    border: 2px solid #004384;
+}
+
+
+/*Repeated HBox*/
+
+.repeat-block-content {
+    border: 2px solid #347B98;
+    border-radius: 12px;
+    background-color: #d4d0d0; 
+    max-width: 98%;
+    flex: 1;
+}
+
+.header-container {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.text-container {
+    width: 12rem;
+}
+
+.text-container-0 {
+    width: 10.5rem;
+    flex-basis: 11%;
+}
+
+.text-form {
+    background-color: #eeeeee;
+    padding: 10px;
+    width: 99%;
+    border-radius: 2px;
+    opacity: 80%;
+    border: 1px solid #dcdcdc;
+    min-height: 2.4rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.label-text {
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: -4px;
+}
+
+
+/*For second Row*/
+
+.checkbox-box {
+    position: relative;
+    margin-top: 10%;
+    margin-left: 5px;
+}
+
+.text-container-ext {
+    width: 9.5rem;
+    flex-basis: 10%;
+}
+
+
+/*For Input*/
+
+.text-input .sapMInputBaseInner {
+    width: 99%;
+    background-color: #f6f6f6;
+    border-radius: 2px;
+    border: 1px solid #dcdcdc;
+    height: 2.4rem;
+}
+
+.text-input .sapMInputBaseInner:focus {
+    background-color: white;
+    opacity: 100%;
+}
+
+.sapMInputBaseWidthPadding {
+    padding: 0;
+    margin: 0;
+}
+
+
+/*Submit Button*/
+
+.submit-container {
+    position: relative;
+    margin-top: 6%;
+    min-height: 100px;
+    min-width: 80px;
+}
+
+.submitBtn {
+    background-color: #347B98;
+    border: 1px solid #E4F1F6;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.submitBtn:hover {
+    box-shadow: 0 0 5px #92bad3, 0 0 10px #92bad3, 0 0 15px #92bad3;
+}
+
+
+/*green Message*/
+
+.msg-serial-container {
+    margin-top: 5px;
+    width: 100%;
+}
+
+.green-msg-container {
+    background-color: green;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 2px solid #5fa2c9;
+    width: 98%;
+    margin-left: 2px;
+}
+
+.msg-text {
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+
+/*Serial Number*/
+
+.serial-text {
+    margin-left: 8px;
+    color: white;
+    font-family: Arial;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.serial-no {
+    background-color: #A43264;
+    min-height: 100%;
+    width: 1.8rem;
+    flex: 0 0 auto;
+    margin-right: 7px;
+}
+
+.serial-msg-no {
+    background-color: #A43264;
+    height: 3rem;
+    width: 1.8rem;
+    margin-right: 7px;
+}
+
+.serial-msg-text {
+    margin-left: 8px;
+    color: white;
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/*width checking*/
+
+.main {
+    width: auto;
+}
+
+.change-bg {
+    background-color: #A43264;
+}
+
+[data-qc-status="X"] {
+    background-color: lightgreen;
+}
